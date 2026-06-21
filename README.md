@@ -61,7 +61,7 @@ python cli.py benchmark
 
 ```bash
 # From the file_encryptor/ directory
-pytest tests/ -v
+python -m pytest tests/ -v
 ```
 
 ### Test coverage includes:
