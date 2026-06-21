@@ -57,6 +57,24 @@ python cli.py inspect secret.enc
 ```bash
 python cli.py benchmark
 ```
+## Running Tests
+
+```bash
+# From the file_encryptor/ directory
+pytest tests/ -v
+```
+
+### Test coverage includes:
+- Round-trip correctness (text, binary, PDF-like, empty, 5 MB)
+- Wrong password rejection (raises WrongPasswordError, no output written)
+- Tamper detection (single bit flip in ciphertext → rejected)
+- Header corruption detection
+- Output format validation (magic bytes, KDF ID, file size)
+- Unique salt and nonce per encryption
+- Unicode and very long passwords
+- Argon2 round-trip (if installed)
+
+---
 
 ---
 
@@ -135,25 +153,6 @@ generation approach eliminates this risk for any realistic workload.
 ### What if the user forgets their password?
 The file is permanently unrecoverable. There is no backdoor, no recovery key.
 This is the security guarantee — not a limitation.
-
----
-
-## Running Tests
-
-```bash
-# From the file_encryptor/ directory
-pytest tests/ -v
-```
-
-### Test coverage includes:
-- Round-trip correctness (text, binary, PDF-like, empty, 5 MB)
-- Wrong password rejection (raises WrongPasswordError, no output written)
-- Tamper detection (single bit flip in ciphertext → rejected)
-- Header corruption detection
-- Output format validation (magic bytes, KDF ID, file size)
-- Unique salt and nonce per encryption
-- Unicode and very long passwords
-- Argon2 round-trip (if installed)
 
 ---
 
